@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+  <title>Pikachu</title>
+  <style>
+    body {
+      text-align: center;
+      background: url("https://assets.pokemon.com//assets/cms2/img/misc/virtual-backgrounds/masters/forest.jpg");
+      background-size: cover;
+      background-position: center;
+      color: yellow;
+      font-family: 'Noto Serif', serif;
+    }
+    p {
+      font-size: 22px;
+    }
+    input {
+      border: 0;
+      padding: 10px;
+      font-size: 18px;
+      font-family: 'Noto Serif', serif;
+    }
+    input[type="submit"] {
+      background: green;
+      color: lightgreen;
+    }
+    img {
+      border-radius: 100px;
+      }
+  </style>
+</head>
+<body>
+  <img src="https://i.pinimg.com/originals/ce/a0/4c/cea04c899c634019320bca5c72e0319a.jpg" data-deferred="1" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb KAlRDb" alt="pikachu⚡️ | Pikachu, Pikachu memes, Pikachu tattoo" id="imi" data-w="300" data-h="300" data-atf="true" data-iml="1416.6799999948125" style="height: 200px; width: 200px; margin: 0px;">
+  <p>Hi! I'm Pikachu, let's become a tainer!</p>
+
+   <input id="Name" placeholder="your name">
+   
+  <input id="Email" placeholder="your trainer email">
+  
+  <input id="submit" type="submit">
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+    
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyACFZs8knjbzqbB5ZLPfoStdWyTKYV6ZkY",
+      authDomain: "melanie-12a4d.firebaseapp.com",
+      databaseURL: "https://melanie-12a4d-default-rtdb.firebaseio.com",
+      projectId: "melanie-12a4d",
+      storageBucket: "melanie-12a4d.appspot.com",
+      messagingSenderId: "976155909585",
+      appId: "1:976155909585:web:2597005469e7258fb4d4f0"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase(app);
+const Name = document.querySelector("#Name") 
+const Email = document.querySelector("#Email")
+document.querySelector('#submit').addEventListener('click', Submit)
+function Submit() {
+  const timestamp = buildTimestamp()
+  
+  set(ref(db, timestamp), {
+	  Name: Name.value,
+      trainer: Email.value,
+  });
+
+  Name.value = ""
+  Email.value = ""
+}
+
+function buildTimestamp() {
+	  const now = new Date();
+	  let timestamp = now.getFullYear().toString() + "/";
+	  //const month = now.toLocaleString('default', { month: 'long' });
+
+	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+	  month = month.toString()
+	  month = addLeadingZero(month)
+	  timestamp += month + "/"; 
+
+	  let date = now.getDate().toString()
+	  date = addLeadingZero(date)
+	  timestamp += date + "/";
+
+	  let hours = now.getHours().toString()
+	  hours = addLeadingZero(hours)
+	  timestamp += hours + ":";
+
+	  let minutes = now.getMinutes().toString()
+	  minutes = addLeadingZero(minutes)
+	  timestamp += minutes + ":";
+
+	  let seconds = now.getSeconds().toString()
+	  seconds = addLeadingZero(seconds)
+	  timestamp += seconds;
+  
+	  return timestamp
+	}
+	
+	function addLeadingZero(units) {
+		if (units.length < 2) {
+			units = "0" + units
+		}
+		return units
+	}
+    
+  </script>
+</body>
