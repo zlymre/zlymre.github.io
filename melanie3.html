@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@1&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Lora', serif;
+  margin: 0 auto;
+  max-width: 600px;
+  background: #cf5151;
+}
+div {
+  height: 300px;
+  background-size: cover;
+  position: relative;
+  margin: 40px 0 0 0;
+  border-radius: 12px;
+}
+h1 {
+  font-family: 'Lora', serif;
+  text-align: center;
+  font-size: 75px;
+  color: #803434;
+  margin: 60px 0 0 0;
+}
+h2 {
+  text-align: center;
+  color: #eb8a83;
+  margin: 0px 0 70px 0;
+}
+p {
+  color: #e0c6c3;
+  background: black;
+  background: linear-gradient(bottom, rgba(0,0,0,2), rgba(164,70,70,.8));
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,2), rgba(164,70,70,.8));
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,2), rgba(164,70,70,.8));
+  padding: 10px;
+  line-height: 28px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 30px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+  font-family: 'Xanh Mono', monospace;
+}
+input {
+	font-size: 22px;
+}
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 150px;
+}
+
+.show-description small {
+  opacity: 1;
+}
+
+.first{
+  background-image: url("https://itadakimasuanime.files.wordpress.com/2015/01/cream-stew-log-horizon-s2-16-02.png");
+}
+.second{
+  background-image: url("https://assets.reedpopcdn.com/the-story-behind-that-weird-camping-minigame-in-pokemon-sword-and-shield-1570787464976.jpg/BROK/thumbnail/1600x900/format/jpg/quality/80/the-story-behind-that-weird-camping-minigame-in-pokemon-sword-and-shield-1570787464976.jpg");
+}
+.dessert{
+  background-image: url("https://i.pinimg.com/originals/75/05/d7/7505d73fabbceb0bc15c0bcfaa1b233f.png");
+}
+.price {
+  float: right;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 20px;
+    margin: 20px 0 30px 0;
+  }
+  div {
+    margin: 20px 12px 0 12px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 24px;
+    color: #e0c6c3;
+    font-family: 'Xanh Mono', monospace;
+  }
+  small {
+    font-size: 16px;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>pika's restaurant</h1>
+<h2>a Kanto eatery</h2>
+<div class="first">
+  <input type="number" min="0" style="width: 50px" class="quantities"><p>brock's stew <span class="price">$18</span><br />
+  <small>2 tablespoons olive oil, 1 pound chicken or beef, chopped, 1 onion, finely chopped, 2 cloves garlic, minced, 3 carrots, chopped, 2 large potatoes, peeled and chopped, 1 broccoli stalk, cut into small florets, 2 ½ cups chicken broth, 4 tablespoons butter </small></p>
+</div>
+  
+<div class="second">
+  <input type="number" min="0" style="width: 50px" class="quantities"><p>spicy sausage curry <span class="price">$25</span><br />
+  <small>The spicy seasoning of the curry roux really brings out the umami of the sausage. It melts right in your mouth.</small></p>
+</div>
+  
+<div class="dessert">
+  <input type="number" min="0" style="width: 50px" class="quantities"><p>poke puffs <span class="price">$13</span><br />
+  <small>Made mostly from berries, Poké Puffs are treats for Pokémon and humans. They come in different flavors, like Sweet, Mint, Citrus, Mocha, and Spice. There are luxurious versions of Poké Puffs, including Spring, Summer, Autumn, Winter, Honor and Wish.</small></p>
+ 
+</div>
+
+  <br><br>
+<input id="Name" placeholder="your name">
+   <br><br>
+  <input id="Email" placeholder="your email">
+  
+  <input id="submit" type="submit"></div>
+  <br><br>
+  
+<script>
+  $('div').on('click', function() {
+      $(this).toggleClass('show-description');
+  });
+</script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+  
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBnvjhd86pSWcSq_X4x_mJUo5mv-Vnmgt8",
+    authDomain: "melanie-3.firebaseapp.com",
+    projectId: "melanie-3",
+    storageBucket: "melanie-3.appspot.com",
+    messagingSenderId: "200522073820",
+    appId: "1:200522073820:web:7b9fbc7093f62181719619"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const Name = document.querySelector("#Name") 
+  const Email = document.querySelector("#Email")
+  
+  
+  document.querySelector('#submit').addEventListener('click', Submit)
+  const quantities = document.querySelectorAll(".quantities") 
+  const itemsList = ["stew", "curry", "puffs"]
+  const prices = document.querySelectorAll(".price")
+  
+  function Submit() {
+    const timestamp = buildTimestamp()
+	  let total = 0
+	  let cart = { }
+	  for  (let i=0; i<quantities.length; i=i+1) {
+	  	if (quantities[i].value != "0" && quantities[i].value != "") {
+			  let price = prices[i].innerHTML.replace('$', '')
+			  total = total + quantities[i].value * price 	
+	  		cart[itemsList[i]] = parseInt(quantities[i].value) 
+	  	}
+	  	quantities[i].value = ""
+	  }
+	  
+	  
+    set(ref(db, timestamp), {
+  	  Name: Name.value,
+        Email: Email.value,
+	   cart: cart,
+	totalPrice: total,
+	paid: "not yet",
+	    
+	    
+    });
+
+    Name.value = ""
+    Email.value = ""
+    cart.value = ""
+
+
+  }
+
+  function buildTimestamp() {
+  	  const now = new Date();
+  	  let timestamp = now.getFullYear().toString() + "/";
+  	  //const month = now.toLocaleString('default', { month: 'long' });
+
+  	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+  	  month = month.toString()
+  	  month = addLeadingZero(month)
+  	  timestamp += month + "/"; 
+
+  	  let date = now.getDate().toString()
+  	  date = addLeadingZero(date)
+  	  timestamp += date + "/";
+
+  	  let hours = now.getHours().toString()
+  	  hours = addLeadingZero(hours)
+  	  timestamp += hours + ":";
+
+  	  let minutes = now.getMinutes().toString()
+  	  minutes = addLeadingZero(minutes)
+  	  timestamp += minutes + ":";
+
+  	  let seconds = now.getSeconds().toString()
+  	  seconds = addLeadingZero(seconds)
+  	  timestamp += seconds;
+  
+  	  return timestamp
+  	}
+	
+  	function addLeadingZero(units) {
+  		if (units.length < 2) {
+  			units = "0" + units
+  		}
+  		return units
+  	}
+</script>
+</body>
